@@ -1,7 +1,7 @@
 /**
  * Created by luyuann on 9/14/2016.
  */
-import React, {Component} from 'react';
+import React, {Component,PropTypes} from 'react';
 import Card from './Card';
 
 class List extends Component{
@@ -14,6 +14,7 @@ class List extends Component{
                          description={card.description}
                          color = {card.color}
                          tasks = {card.tasks}
+                         taskCallbacks = {this.props.taskCallbacks}
                     />
         })
         return (
@@ -22,6 +23,12 @@ class List extends Component{
                 {cards}
             </div>)
     }
+}
+
+List.propTypes = {
+    title:PropTypes.string.isRequired,
+    cards:PropTypes.arrayOf(PropTypes.object),
+    taskCallbacks: PropTypes.object
 }
 
 export default List;
