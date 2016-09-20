@@ -12,7 +12,7 @@ class CheckList extends Component{
     }
     render(){
         console.log(this.props.tasks);
-        let tasks = this.props.tasks.map((task)=>(
+        let tasks = this.props.tasks.map((task,taskIndex)=>(
             <li key={task.id} className="checklist__task">
                 <input type="checkbox" defaultChecked={task.done} onChange={this.props.taskCallbacks.toggle.bind(null,this.props.cardId,task.id,taskIndex)}/>
                 {task.name}
