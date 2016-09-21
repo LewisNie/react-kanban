@@ -31,6 +31,7 @@ class List extends Component{
                          color = {card.color}
                          tasks = {card.tasks}
                          taskCallbacks = {this.props.taskCallbacks}
+                         cardCallbacks={this.props.cardCallbacks}
                     />
         })
         return connectDropTarget(
@@ -42,10 +43,13 @@ class List extends Component{
 }
 
 List.propTypes = {
+    id:PropTypes.string,
     title:PropTypes.string.isRequired,
+    description:PropTypes.string,
     cards:PropTypes.arrayOf(PropTypes.object),
     taskCallbacks: PropTypes.object,
-    connectDropTarget:PropTypes.func.isRequired
+    connectDropTarget:PropTypes.func.isRequired,
+    cardCallbacks:PropTypes.object
 }
 
 export default DropTarget("hello",listTargetSpec,collect)(List);
