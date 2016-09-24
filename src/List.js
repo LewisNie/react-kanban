@@ -22,7 +22,7 @@ let collect = (connect,monitor)=>{
 class List extends Component{
     render(){
         const {connectDropTarget} = this.props;
-        console.log(this.props.cards);
+        //console.log(this.props.cards);
         var cards = this.props.cards.map((card)=>{
             return <Card key={card.id}
                          id = {card.id}
