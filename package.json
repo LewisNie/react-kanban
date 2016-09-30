@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.13.0",
+    "flux": "^3.0.0",
     "marked": "^0.3.6",
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.2",

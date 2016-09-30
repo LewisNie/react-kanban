@@ -7,6 +7,9 @@ import KanbanBoard from './KanbanBoard';
 import 'whatwg-fetch';
 import 'babel-polyfill';
 import update from 'react-addons-update';
+import {Container} from 'flux/utils';
+import CardActionCreators from '../actions/CardActionCreator';
+import CardStore from '../stores/CardStore';
 
 const API_URL = 'http://kanbanapi.pro-react.com';
 const API_HEADERS = {
@@ -26,47 +29,10 @@ class KanbanBoardContainer extends Component{
     }
 
     addCard(card){
-        let prevState = this.state;
-        if(card.id == null){
-            let card = Object.assign({},card,{id:Date.now()});
-        }
-        let nextState = update(this.state.cards,{$push:[card]});
-        this.setState({cards:nextState});
-        fetch(`${API_URL}/cards`,{
-            method:'post',
-            headers:API_HEADERS,
-            body:JSON.stringify(card)
-        }).then((response)=>{
-            if(response.ok) return response.json();
-            else{
-                throw new Error("");
-            }
-        }).then((responseData)=>{
-            card.id = responseData.id;
-            this.setState({cards:nextState});
-        })
-            .catch((error)=>{
-                this.setState(prevState);
-            })
+        CardActionCreators.addCard(card);
     }
     updateCard(card){
-        let prevState = this.state;
-        let cardIndex = this.state.cards.findIndex((c)=>c.id==card.id);
-
-        let nextState = update(this.state.cards,{[cardIndex]:{$set : card}});
-        this.setState({cards:nextState});
-        fetch(`${API_URL}/cards/${card.id}`,{
-            method:'put',
-            headers:API_HEADERS,
-            body:JSON.stringify(card)
-        }).then((response)=>{
-            if(!response.ok){
-                throw new Error('Server response wasn\'t OK');
-            }
-        }).catch((error)=>{
-            console.log("Fetch error: ", error);
-            this.setState(prevState);
-        })
+        CardActionCreators.updateCard(card);
     }
     addTask(cardId,taskName){
         let cardIndex = this.state.cards.findIndex((card)=>card.id==cardId);
@@ -119,7 +85,7 @@ class KanbanBoardContainer extends Component{
         });
     }
     componentDidMount(){
-        fetch(API_URL+'/cards',{headers:API_HEADERS})
+       /* fetch(API_URL+'/cards',{headers:API_HEADERS})
             .then((response)=>response.json())
             .then((responseData)=>{
                 console.log("i am fetching data");
@@ -127,8 +93,12 @@ class KanbanBoardContainer extends Component{
             })
             .catch((error)=>{
                 console.log('Error fetching and parsing data',error);
-            });
+            });*/
+        CardActionCreators.fetchCards();
+        console.log(this.state.cards);
+
     }
+
 
     updateCardStatus(cardId,listId){
         let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
@@ -202,4 +172,9 @@ class KanbanBoardContainer extends Component{
     }
 }
 
-export default KanbanBoardContainer;
+KanbanBoardContainer.getStores = ()=>([CardStore]);
+KanbanBoardContainer.calculateState = (prevState) =>({
+    cards:CardStore.getState(),
+});
+
+export default Container.create(KanbanBoardContainer);

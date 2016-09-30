@@ -5,6 +5,7 @@ import React,{Component, PropTypes} from 'react';
 
 class CardForm extends Component{
     handleChange(field,e){
+        this.props.draftCard[field] = e.target.value;
         this.props.handleChange(field,e.target.value);
     }
 

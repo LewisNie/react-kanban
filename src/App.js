@@ -1,11 +1,11 @@
 import React ,{Component} from 'react';
 import ReactDom from 'react-dom';
-import KanbanBoardContainer from './KanBanContainer';
-import KanbanBoard from './KanbanBoard';
+import KanbanBoardContainer from './components/KanBanContainer';
+import KanbanBoard from './components/KanbanBoard';
 import {Router,Route,browserHistory} from 'react-router';
-import EditCard from './EditCard';
+import EditCard from './components/EditCard';
 
-import NewCard from './NewCard';
+import NewCard from './components/NewCard';
 
 let mockCard = [{
     id:2,
