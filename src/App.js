@@ -1,9 +1,11 @@
 import React ,{Component} from 'react';
 import ReactDom from 'react-dom';
-import KanbanBoardContainer from './KanBanContainer';
-//import CheckList from './CheckList';
-//import Card from './Card';
-//import List from './List';
+import KanbanBoardContainer from './components/KanBanContainer';
+import KanbanBoard from './components/KanbanBoard';
+import {Router,Route,browserHistory} from 'react-router';
+import EditCard from './components/EditCard';
+
+import NewCard from './components/NewCard';
 
 let mockCard = [{
     id:2,
@@ -26,6 +28,15 @@ let mockCard = [{
         }
     ]
 }]
-ReactDom.render(<KanbanBoardContainer />,document.getElementById('root'));
+ReactDom.render((
+    <Router history={browserHistory}>
+        <Route component={KanbanBoardContainer}>
+            <Route path="/" component={KanbanBoard}>
+                <Route path="new" component={NewCard}/>
+                <Route path="edit/:card_id" component={EditCard}/>
+            </Route>
+        </Route>
+    </Router>
+),document.getElementById('root'));
 //ReactDom.render(<List cards={mockCard} />, document.getElementById('root'));
 //ReactDom.render(<Card title={cardsList[1].title} description={cardsList[1].description} cardId={cardsList[1].id} tasks = {cardsList[1].tasks} />, document.getElementById('root'));
