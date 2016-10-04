@@ -85,15 +85,6 @@ class KanbanBoardContainer extends Component{
         });
     }
     componentDidMount(){
-       /* fetch(API_URL+'/cards',{headers:API_HEADERS})
-            .then((response)=>response.json())
-            .then((responseData)=>{
-                console.log("i am fetching data");
-                this.setState({cards:responseData});
-            })
-            .catch((error)=>{
-                console.log('Error fetching and parsing data',error);
-            });*/
         CardActionCreators.fetchCards();
         console.log(this.state.cards);
 
@@ -101,19 +92,20 @@ class KanbanBoardContainer extends Component{
 
 
     updateCardStatus(cardId,listId){
-        let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
-        let card = this.state.cards[cardIndex];
-        if(card.status!==listId){
-            this.setState(update(this.state,{
-                cards:{
-                    [cardIndex]:{
-                        status:{
-                            $set:listId
-                        }
-                    }
-                }
-            }))
-        }
+        // let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
+        // let card = this.state.cards[cardIndex];
+        // if(card.status!==listId){
+        //     this.setState(update(this.state,{
+        //         cards:{
+        //             [cardIndex]:{
+        //                 status:{
+        //                     $set:listId
+        //                 }
+        //             }
+        //         }
+        //     }))
+        // }
+        CardActionCreators.updateCardStatus(cardId,listId);
 
     }
 

@@ -13,5 +13,13 @@ export default {
 
     UPDATE_CARD:'update card',
     UPDATE_CARD_SUCCESS:'update card success',
-    UPDATE_CARD_ERROR:'update card error'
+    UPDATE_CARD_ERROR:'update card error',
+
+    UPDATE_CARD_STATUS:'update card status',
+
+    UPDATE_CARD_POSITION:'update card error',
+
+    CREATE_TASK:'create task',
+    CREATE_TASK_SUCCESS:'create task success',
+    CREATE_TASK_ERROR:'create task error',
 }

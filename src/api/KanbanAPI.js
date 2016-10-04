@@ -35,7 +35,6 @@ let KanbanAPI = {
         }).then((response)=>response.json());
         return data;
     }
-
 };
 
 export default KanbanAPI;

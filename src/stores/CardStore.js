@@ -30,11 +30,24 @@ class CardStore extends ReduceStore{
                 });
             case constants.UPDATE_CARD_SUCCESS:
                 cardIndex = this.getCardIndex(action.payload.card.id);
-                return update(this.getState, {
+                return update(this.getState(), {
                     [cardIndex]:{
                         $set:action.payload.card
                     }
                 });
+            case constants.UPDATE_CARD_STATUS:
+                cardIndex = this.getCardIndex(action.payload.cardId);
+                let card = this.getState();
+                if(card[cardIndex].status != action.payload.listId){
+                    return update(this.getState(), {
+                        [cardIndex]:{
+                            status: {$set:action.payload.listId}
+                        }
+                    })
+                }
+            case constants.UPDATE_CARD_POSITION:
+
+
             default:
                 return state;
         }

@@ -26,7 +26,21 @@ let CardActionCreators = {
             success:constants.UPDATE_CARD_SUCCESS,
             error:constants.UPDATE_CARD_ERROR
         },{card})
+    },
+    updateCardStatus(cardId,listId){
+        AppDispatcher.dispatch({
+            type:constants.UPDATE_CARD_STATUS,
+            payload:{cardId, listId}
+        })
+    },
+    updateCardPosition(cardId, afterId){
+        AppDispatcher.dispatch({
+            type:constants.UPDATE_CARD_POSITION,
+            payload:{cardId,afterId}
+        })
     }
+
+
 };
 
 
